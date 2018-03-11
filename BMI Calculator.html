@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+    <head>
+        <style>
+        </style>
+    </head>
+    <body>
+        Hieght (in m): <input id="Hieght" type="text"><br>
+        Weight (in kg): <input id="Weight" type="text"><br>
+        <button onclick="calculate();">Calculate BMI</button>
+        <br>
+        BMI: <input id="BMI" type="text"><br>
+        Health: <input id="Health" type="text"><br>
+        <script>
+            function calculate() {
+                var h = parseFloat(document.getElementById("Hieght").value);
+                var w = parseFloat(document.getElementById("Weight").value);
+                bmi = w / (h * h);
+                document.getElementById("BMI").value = bmi;
+                //Data taken from here: https://amp.businessinsider.com/images/57d291cadd0895c6308b46b0-750-580.png
+                if(bmi >= 40) {
+                    document.getElementById("Health").value = "Extremely Obese";
+                } else if(bmi >= 30) {
+                    document.getElementById("Health").value = "Obese";
+                } else if(bmi >= 25) {
+                    document.getElementById("Health").value = "Overweight";
+                } else if(bmi >= 18.5) {
+                    document.getElementById("Health").value = "Healthy";
+                } else if(bmi < 18.5) {
+                    document.getElementById("Health").value = "Underweight";
+                }
+            }
+        </script>
+    </body>
+</html>
