@@ -1,16 +1,56 @@
 <!doctype html>
 <html>
     <head>
+        <link href='http://fonts.googleapis.com/css?family=Ubuntu:bold' rel='stylesheet' type='text/css'>
         <style>
+            .button {
+                font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+                background: linear-gradient(141deg, #0fb8ae 0%, #1fc8db 51%, #2cb5e9 75%);
+                border: none;
+                color: white;
+                padding: 5% 7%;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 120%;
+                width: 50%;
+                height: 50%;
+                margin-left: 25%;
+                margin-right: 25%;
+                margin-top: 4%;
+                margin-bottom: 2%;
+                cursor: pointer;
+            }
+            h2 {
+                font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+                width: 50%;
+                margin-left: 25%;
+                margin-right: 25%;
+                margin-top: 5%;
+                margin-bottom: 5%;
+                text-align: center;
+                text-decoration: none;
+            }
+            .p {
+                width: 50%;
+                margin-left: 25%;
+                margin-right: 25%;
+                margin-bottom: 1px;
+                height: 30px;
+                text-align: center;
+                font-size: large;
+            }
         </style>
     </head>
     <body>
-        Hieght (in m): <input id="Hieght" type="text"><br>
-        Weight (in kg): <input id="Weight" type="text"><br>
-        <button onclick="calculate();">Calculate BMI</button>
+        <h2>HEIGHT (M)</h2>
+        <input class="p" id="Hieght" type="text"><br>
+        <h2>WEIGHT (KG)</h2>
+        <input class="p" id="Weight" type="text"><br>
+        <button class="button" onclick="calculate();">CALCULATE BMI</button>
         <br>
-        BMI: <input id="BMI" type="text"><br>
-        Health: <input id="Health" type="text"><br>
+        <h2 id="Health">BMI:</h2> <input class="p" id="BMI" type="text"><br>
+        <!-- <p>Health:</p> <input id="Health" type="text"><br> -->
         <script>
             function calculate() {
                 var h = parseFloat(document.getElementById("Hieght").value);
@@ -19,17 +59,18 @@
                 document.getElementById("BMI").value = bmi;
                 //Data taken from here: https://amp.businessinsider.com/images/57d291cadd0895c6308b46b0-750-580.png
                 if(bmi >= 40) {
-                    document.getElementById("Health").value = "Extremely Obese";
+                    document.getElementById("Health").innerHTML = "BMI: Extremely Obese";
                 } else if(bmi >= 30) {
-                    document.getElementById("Health").value = "Obese";
+                    document.getElementById("Health").innerHTML = "BMI: Obese";
                 } else if(bmi >= 25) {
-                    document.getElementById("Health").value = "Overweight";
+                    document.getElementById("Health").innerHTML = "BMI: Overweight";
                 } else if(bmi >= 18.5) {
-                    document.getElementById("Health").value = "Healthy";
+                    document.getElementById("Health").innerHTML = "BMI: Healthy";
                 } else if(bmi < 18.5) {
-                    document.getElementById("Health").value = "Underweight";
+                    document.getElementById("Health").innerHTML = "BMI: Underweight";
                 }
             }
         </script>
     </body>
 </html>
+
