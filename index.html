@@ -12,51 +12,95 @@
                 text-align: center;
                 text-decoration: none;
                 display: inline-block;
-                font-size: 120%;
-                width: 50%;
+                font-size: 300%;
+                width: 90%;
                 height: 50%;
-                margin-left: 25%;
-                margin-right: 25%;
+                margin-left: 5%;
+                margin-right: 5%;
                 margin-top: 4%;
+                cursor: pointer;
+            }
+            .change {
+                font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+                background: linear-gradient(141deg, #0fb8ae 0%, #1fc8db 51%, #2cb5e9 75%);
+                border: none;
+                color: white;
+                padding: 1% 7%;
+                text-align: center;
+                text-decoration: none;
+                display: inline-block;
+                font-size: 200%;
+                width: 90%;
+                height: 10vh;
+                margin-left: 5%;
+                margin-right: 5%;
+                margin-top: 1%;
                 margin-bottom: 2%;
                 cursor: pointer;
             }
-            h2 {
+            h1 {
                 font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
-                width: 50%;
-                margin-left: 25%;
-                margin-right: 25%;
+                width: 90%;
+                margin-left: 5%;
+                margin-right: 5%;
                 margin-top: 5%;
                 margin-bottom: 5%;
                 text-align: center;
                 text-decoration: none;
+                font-size: 300%;
+            }
+            h2 {
+                font-family: 'Ubuntu', Helvetica, Arial, sans-serif;
+                display: inline-block;
+                margin-left: 5%;
+                margin-top: 5%;
+                margin-bottom: 5%;
+                text-align: center;
+                text-decoration: none;
+                font-size: 300%;
+                width: 42%;
             }
             .p {
-                width: 50%;
-                margin-left: 25%;
-                margin-right: 25%;
+                width: 90%;
+                margin-left: 5%;
+                margin-right: 5%;
                 margin-bottom: 1px;
-                height: 30px;
+                height: 80px;
                 text-align: center;
-                font-size: large;
+                font-size: 300%;
+            }
+            .bmi3035 {
+                width: 42%;
+                margin-left: 5%;
+                /* margin-right: 5%; */
+                margin-bottom: 1px;
+                height: 80px;
+                text-align: center;
+                font-size: 300%;
             }
         </style>
     </head>
     <body>
-        <h2>HEIGHT (M)</h2>
-        <input class="p" id="Hieght" type="text"><br>
-        <h2>WEIGHT (KG)</h2>
-        <input class="p" id="Weight" type="text"><br>
+        <h1>HEIGHT (M)</h1>
+        <input class="p" id="Hieght" type="decimal"><br>
+        <h1>WEIGHT (KG)</h1>
+        <input class="p" id="Weight" type="decimal"><br>
         <button class="button" onclick="calculate();">CALCULATE BMI</button>
+        <button class="change" onclick="calculate();">CHANGE UNITS</button>
         <br>
-        <h2 id="Health">BMI:</h2> <input class="p" id="BMI" type="text"><br>
+        <h1 id="Health">BMI:</h1> <input class="p" id="BMI" type="decimal"><br>
+        <h2 align="left">BMI 30 (KG)</h2><h2 align="right">BMI 35 (KG)</h2> <br>
+        <input class="bmi3035" id="bmi30" type="decimal"><input class="bmi3035" id="bmi35" type="decimal">
         <!-- <p>Health:</p> <input id="Health" type="text"><br> -->
         <script>
             function calculate() {
+                
                 var h = parseFloat(document.getElementById("Hieght").value);
                 var w = parseFloat(document.getElementById("Weight").value);
                 bmi = w / (h * h);
-                document.getElementById("BMI").value = bmi;
+                weight30 = 30 * (h * h);
+                weight35 = 35 * (h * h);
+                document.getElementById("BMI").value = bmi.toFixed(2);
                 //Data taken from here: https://amp.businessinsider.com/images/57d291cadd0895c6308b46b0-750-580.png
                 if(bmi >= 40) {
                     document.getElementById("Health").innerHTML = "BMI: Extremely Obese";
@@ -69,8 +113,10 @@
                 } else if(bmi < 18.5) {
                     document.getElementById("Health").innerHTML = "BMI: Underweight";
                 }
+                
+                document.getElementById("bmi30").value = weight30.toFixed(2);
+                document.getElementById("bmi35").value = weight35.toFixed(2);
             }
         </script>
     </body>
 </html>
-
