@@ -1,3 +1,4 @@
+<!-- don't read farther if you want your eyes to be spared the horror of this code -->
 <!doctype html>
 <html>
     <head>
@@ -31,7 +32,7 @@
                 display: inline-block;
                 font-size: 200%;
                 width: 90%;
-                height: 10%;
+                height: 60px;
                 margin-left: 5%;
                 margin-right: 5%;
                 margin-top: 1%;
@@ -81,22 +82,65 @@
         </style>
     </head>
     <body>
-        <h1>HEIGHT (M)</h1>
+        <h1 id="hhh">HEIGHT (M)</h1>
         <input class="p" id="Hieght" type="decimal"><br>
-        <h1>WEIGHT (KG)</h1>
+        <h1 id="www">WEIGHT (KG)</h1>
         <input class="p" id="Weight" type="decimal"><br>
         <button class="button" onclick="calculate();">CALCULATE BMI</button>
-        <button class="change" onclick="calculate();">CHANGE UNITS</button>
+        <button class="change" onclick="flip();">CHANGE UNITS</button>
         <br>
         <h1 id="Health">BMI:</h1> <input class="p" id="BMI" type="decimal"><br>
-        <h2 align="left">BMI 30 (KG)</h2><h2 align="right">BMI 35 (KG)</h2> <br>
+        <h2 id="left30" align="left">BMI 30 (KG)</h2><h2 id="right35" align="right">BMI 35 (KG)</h2> <br>
         <input class="bmi3035" id="bmi30" type="decimal"><input class="bmi3035" id="bmi35" type="decimal">
         <!-- <p>Health:</p> <input id="Health" type="text"><br> -->
         <script>
-            function calculate() {
+            var pounds = false;
+            
+            function flip() {
+                if(pounds===false) {
+                    toPounds();
+                } else {
+                    toKilos();
+                }
+            }
+            
+            function toPounds() {
+                document.getElementById("hhh").innerHTML = "HEIGHT (F.I)";
+                document.getElementById("www").innerHTML = "WEIGHT (LB)";
+                document.getElementById("left30").innerHTML = "BMI 30 (LB)";
+                document.getElementById("right35").innerHTML = "BMI 35 (LB)";
                 
-                var h = parseFloat(document.getElementById("Hieght").value);
-                var w = parseFloat(document.getElementById("Weight").value);
+                pounds = true;
+            }
+            
+            function toKilos() {
+                document.getElementById("hhh").innerHTML = "HEIGHT (M)";
+                document.getElementById("www").innerHTML = "WEIGHT (KG)";
+                document.getElementById("left30").innerHTML = "BMI 30 (KG)";
+                document.getElementById("right35").innerHTML = "BMI 35 (KG)";
+                
+                pounds = false;
+            }
+            
+            
+            function calculate() {
+                var h, w;
+                if(pounds===true) {
+                    //height -> feet to kilos
+                    temp = parseFloat(document.getElementById("Hieght").value).toFixed(2);
+                    feet = Math.floor(parseFloat(temp));
+                    inchesfeet = parseFloat(temp.substring(2)) / 12;
+                    h = ((feet + inchesfeet) / 3.2808).toFixed(5);
+                    console.log(h);
+                    //weight -> pounds to kg
+                    w = parseFloat(document.getElementById("Weight").value) / 2.2046226218;
+                    console.log(w);
+                } else {
+                    h = parseFloat(document.getElementById("Hieght").value);
+                    w = parseFloat(document.getElementById("Weight").value);
+                    
+                }
+                /* bmi = w / (h * h); */
                 bmi = w / (h * h);
                 weight30 = 30 * (h * h);
                 weight35 = 35 * (h * h);
@@ -114,8 +158,13 @@
                     document.getElementById("Health").innerHTML = "BMI: Underweight";
                 }
                 
-                document.getElementById("bmi30").value = weight30.toFixed(2);
-                document.getElementById("bmi35").value = weight35.toFixed(2);
+                if(pounds===false) {
+                    document.getElementById("bmi30").value = weight30.toFixed(2);
+                    document.getElementById("bmi35").value = weight35.toFixed(2);
+                } else {
+                    document.getElementById("bmi30").value = (weight30 * 2.2046226218).toFixed(2);
+                    document.getElementById("bmi35").value = (weight35 * 2.2046226218).toFixed(2);
+                }
             }
         </script>
     </body>
